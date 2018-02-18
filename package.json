@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/vision23media/vision23media/issues"
   },
-  "homepage": "https://github.com/vision23media/vision23media#readme"
+  "homepage": "https://github.com/vision23media/vision23media#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "handlebars": "^4.0.11"
+  }
 }
