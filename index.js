@@ -10,3 +10,5 @@ function v23m(res){
 app.get('/vision', (req, res) => v23m(res))
 
 app.get('/', (req, res) => res.status(404).sendFile('/public/404.jpg'))
+
+app.listen(3000, () => console.log('Example app listening on port 3000!'))
