@@ -3,6 +3,8 @@ const hbs = require('hbs')
 const fs = require('fs')
 const blogEngine = require('./blog')
 const app = express()
+const http = require('http')
+const connect = require('connect')
 
 app.set('view engine', 'html');
 app.engine('html', hbs.__express);
@@ -10,7 +12,6 @@ app.engine('html', hbs.__express);
 var partialsDir = __dirname + '/views/partials';
 var filenames = fs.readdirSync(partialsDir);
 
-console.log(filenames);
 
 filenames.forEach(function (filename) {
   var matches = /^([^.]+).html$/.exec(filename);
@@ -20,6 +21,25 @@ filenames.forEach(function (filename) {
   var name = matches[1];
   var template = fs.readFileSync(partialsDir + '/' + filename, 'utf8');
   hbs.registerPartial(name, template);
+});
+
+
+
+var MongoClient = require('mongodb').MongoClient;
+MongoClient.connect('mongodb://localhost:27017/', function(err, db) {
+    if(err) {
+        console.log('Sorry, there is no mongo db server running.');
+    } else {
+    	console.log("got the db");
+        var attachDB = function(req, res, next) {
+            req.db = db;
+            //next();
+        };
+
+        http.createServer(app).listen(config.port, function(){
+            console.log('Express server listening on port ' + config.port);
+        });
+    }
 });
 
 
