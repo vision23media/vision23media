@@ -1,0 +1,21 @@
+<html>
+<head></head>
+<body>
+	<header>
+		
+	</header>
+	<main>
+		 <h1>Blog! {{> myPartial}}</h1>
+ 
+{{#each entries}}
+    <p>
+        <a href="/article/{{id}}">{{title}}</a><br/>
+        Published: {{published}}
+    </p>
+{{/each}}
+	</main>
+	<footer>
+		
+	</footer>
+</body>
+</html>
