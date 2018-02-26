@@ -36,11 +36,33 @@ MongoClient.connect('mongodb://localhost:27017/', function(err, db) {
             //next();
         };
 
-        http.createServer(app).listen(config.port, function(){
-            console.log('Express server listening on port ' + config.port);
+        var collectionz = db.collection('primer');
+        var findQueens = collectionz.find({ borough: 'Queens' });
+
+        //console.log(collection);
+        //console.log(findQueens.count);
+
+
+        app.get('/vision', (req, res) => v23m(res))
+        app.get('/about', (req, res) =>  res.render('about'))
+
+        //app.get('/', (req, res) => res.sendFile(__dirname + '/views/index.html'))
+
+        app.get('/', function(req, res) {
+            res.render('index',{title:"My Blog", entries:blogEngine.getBlogEntries()});
+        });
+
+        http.createServer(app).listen(27017, function(){
+            console.log('Express server listening on port 27017');
         });
     }
+
 });
+
+
+
+
+
 
 
 function v23m(res){
@@ -51,13 +73,6 @@ function v23m(res){
 
 hbs.registerPartial('myPartial', 'metoo');
 
-app.get('/vision', (req, res) => v23m(res))
-app.get('/about', (req, res) =>  res.render('about'))
 
-//app.get('/', (req, res) => res.sendFile(__dirname + '/views/index.html'))
-
-app.get('/', function(req, res) {
-    res.render('index',{title:"My Blog", entries:blogEngine.getBlogEntries()});
-});
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
