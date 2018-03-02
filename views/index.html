@@ -3,6 +3,13 @@
 <body>
 	<header>
 		{{title}}
+		<ul>
+			<li>Name: {{queens.name}}</li>
+			<li>Location: {{queens.borough}}</li>
+			<li>Cuisine: {{queens.cuisine}}</li>
+			<li>Building#: {{queens.address.building}}</li>
+			<li>Street#: {{queens.address.street}}</li>
+			<li>Zipcode: {{queens.address.zipcode}}</li>
 	</header>
 	<main>
 		{{> nav}}
